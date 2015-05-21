@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <mysql/mysql.h>
-#include "gamedbsystem.h"
+#include "gamedb.h"
 
 #define MAX_COL_LENGTH 35
 
@@ -75,19 +75,9 @@ void print_table(char* tablename,MYSQL* conn) {
 		mysql_free_result(res);
 	}
 }
-int main(int argc, char** argv) {
-	MYSQL *conn;
+
+void prompt_menu(MYSQL* conn) {
 	char tblname[50];
-	gamedbSystem *sys;
-	conn=mysql_init(NULL);
-	if(!mysql_real_connect(conn,"gamedb.ccyrykcpfupb.eu-central-1.rds.amazonaws.com","d_idea","idea1234","gamedb",0,NULL,0)) {
-		printf( "Failed to connect to MySQL: Error: %s\n",mysql_error(conn));
-		exit(1);
-	}
-	sys = malloc(sizeof(gamedbSystem));
-	getSystemFromDb(conn,sys);
-	printf("System Id: %i Name:%s\n",sys->id,sys->name);
-	/*
 	system("clear");
 	printf("Enter the table name (exit to quit): ");
 	scanf("%50s",tblname);
@@ -96,8 +86,38 @@ int main(int argc, char** argv) {
 		printf("Enter the table name (exit to quit): ");
 		scanf("%50s",tblname);
 		system("clear");
-	}*/
+	}
+}
+
+int main(int argc, char** argv) {
+	MYSQL *conn;
+	gamedbSystem *sys;
+	gamedbSoftware *soft;
+	gamedbRelease *release;
+	gamedbFile *file;
+	conn=mysql_init(NULL);
+	if(!mysql_real_connect(conn,"gamedb.ccyrykcpfupb.eu-central-1.rds.amazonaws.com","d_idea","idea1234","gamedb",0,NULL,0)) {
+		printf( "Failed to connect to MySQL: Error: %s\n",mysql_error(conn));
+		exit(1);
+	}
+	system("clear");
+	sys=malloc(sizeof(gamedbSystem));
+	getSystemFromDb(1,conn,sys);
+	printf("\nSystem\n--------\nId: %i\nName: %s\nManufacturer: %s\nFormat: %s\nAcronym: %s\n",sys->id,sys->name,sys->manufacturer,sys->format,sys->acronym);
+	soft=malloc(sizeof(gamedbSoftware));
+	getSoftwareFromDb(1,conn,soft);
+	printf("\nSoftware\n--------\nId: %i\nName: %s\nType: %s\nSystem Id: %i\n",soft->id,soft->name,soft->type,soft->systemId);
+	release=malloc(sizeof(gamedbRelease));
+	getReleaseFromDb(1,conn,release);
+	printf("\nRelease\n--------\nId: %i\nName: %s\nRregion: %s\nSoftware Id: %i\n",release->id,release->name,release->region,release->softwareId);
+	file=malloc(sizeof(gamedbFile));
+	getFileFromDb(1,conn,file);
+	printf("\nFile\n--------\nId: %i\nName: %s\nSize: %i\nCRC: %s\nMD5: %s\nSHA1: %s\nStatus: %s\nRelease Id: %i\n",file->id,file->name,file->size,file->crc,file->md5,file->sha1,file->status,file->releaseId);
+	puts("\n-- EOF --\n\n");
 	free(sys);
+	free(soft);
+	free(release);
+	free(file);
 	mysql_close(conn);
 	return 0;
 }
