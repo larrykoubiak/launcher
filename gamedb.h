@@ -6,6 +6,16 @@
 #include <string.h>
 #include <stdio.h>
 
+typedef struct gamedbImage {
+	int id;
+	char name[256];
+	int size;
+	int width;
+	int height;
+	int releaseTypeId;
+	char source[50];
+} gamedbImage;
+
 typedef struct gamedbFile {
 	int id;
 	char name[256];
@@ -23,6 +33,7 @@ typedef struct gamedbRelease {
 	char region[50];
 	int softwareId;
 	gamedbFile *files;
+	int nbFiles;
 } gamedbRelease;
 
 typedef struct gamedbSoftware {
@@ -31,6 +42,7 @@ typedef struct gamedbSoftware {
 	char type[50];
 	int systemId;
 	gamedbRelease *releases;
+	int nbReleases;
 } gamedbSoftware;
 
 typedef struct gamedbSystem {
@@ -40,11 +52,25 @@ typedef struct gamedbSystem {
 	char format[50];
 	char acronym[6];
 	gamedbSoftware *softwares;
+	int nbSoftwares;
 } gamedbSystem;
+
+typedef struct gamedb {
+	int nbSystems;
+	gamedbSystem* systems;
+} gamedb;
+
+void getFiles(gamedbRelease* release, MYSQL* conn);
+void getReleases(gamedbSoftware* software, MYSQL* conn);
+void getSoftwares(gamedbSystem* system, MYSQL* conn);
+void getSystems(gamedb* db,MYSQL* conn);
+void getGameDb(gamedb* db);
+void freeGameDb(gamedb* db);
 
 void getSystemFromDb(int systemId,MYSQL* conn, gamedbSystem* sys);
 void getSoftwareFromDb(int softwareId,MYSQL* conn, gamedbSoftware* soft);
 void getReleaseFromDb(int releaseId, MYSQL* conn, gamedbRelease *rel);
 void getFileFromDb(int fileId, MYSQL* conn, gamedbFile *file);
+void getImageFromDb(int imageId, MYSQL* conn, gamedbImage *image);
 
 #endif
