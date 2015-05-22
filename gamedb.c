@@ -1,86 +1,37 @@
 #include "gamedb.h"
 
-void getSystemFromDb(int systemId,MYSQL *conn, gamedbSystem *sys) {
+void getImages(gamedbRelease* release, MYSQL* conn) {
 	MYSQL_RES *res;
 	MYSQL_ROW row;
+	int i;
 	char sql[255];
-	sprintf(sql,"SELECT * FROM tblSystems WHERE systemId = %i",systemId);
-	mysql_query(conn,sql);
-	res=mysql_use_result(conn);
-	row=mysql_fetch_row(res);
-	sys->id=atoi((char*)row[0]);
-	strcpy(sys->name,(char*)row[1]);
-	strcpy(sys->manufacturer,(char*)row[2]);
-	strcpy(sys->format,(char*)row[3]);
-	strcpy(sys->acronym,(char*)row[4]);
-	mysql_free_result(res);
-}
-
-void getSoftwareFromDb(int softwareId, MYSQL* conn, gamedbSoftware *soft) {
-	MYSQL_RES *res;
-	MYSQL_ROW row;
-	char sql[255];
-	sprintf(sql,"SELECT * FROM tblSoftwares WHERE softwareId = %i",softwareId);
-	mysql_query(conn,sql);
-	res=mysql_use_result(conn);
-	row=mysql_fetch_row(res);
-	soft->id = atoi((char*)row[0]);
-	strcpy(soft->name,(char*)row[1]);
-	strcpy(soft->type,(char*)row[2]);
-	soft->systemId = atoi((char*)row[3]);
-	mysql_free_result(res);
-}
-
-void getReleaseFromDb(int releaseId, MYSQL* conn, gamedbRelease *rel) {
-	MYSQL_RES *res;
-	MYSQL_ROW row;
-	char sql[255];
-	sprintf(sql,"SELECT * FROM tblReleases WHERE releaseID = %i",releaseId);
-	mysql_query(conn,sql);
-	res=mysql_use_result(conn);
-	row=mysql_fetch_row(res);
-	rel->id = atoi((char*)row[0]);
-	strcpy(rel->name,(char*)row[1]);
-	strcpy(rel->region,(char*)row[2]);
-	rel->softwareId = atoi((char*)row[3]);
-	mysql_free_result(res);
-}
-
-void getFileFromDb(int fileId, MYSQL* conn, gamedbFile *file) {
-	MYSQL_RES *res;
-	MYSQL_ROW row;
-	char sql[255];
-	sprintf(sql,"SELECT * FROM tblFiles WHERE fileId = %i",fileId);
-	mysql_query(conn,sql);
-	res=mysql_use_result(conn);
-	row=mysql_fetch_row(res);
-	file->id = atoi((char*)row[0]);
-	strcpy(file->name,(char*)row[1]);
-	file->size = atoi((char*)row[2]);
-	strcpy(file->crc,(char*)row[3]);
-	strcpy(file->md5,(char*)row[4]);
-	strcpy(file->sha1,(char*)row[5]);
-	strcpy(file->status,(char*)row[6]);
-	file->releaseId = atoi((char*)row[7]);
-	mysql_free_result(res);
-}
-
-void getImageFromDb(int imageId, MYSQL* conn, gamedbImage *image) {
-	MYSQL_RES *res;
-	MYSQL_ROW row;
-	char sql[255];
-	sprintf(sql,"SELECT * FROM tblImages WHERE imageId = %i",imageId);
-	mysql_query(conn,sql);
-	res=mysql_use_result(conn);
-	row=mysql_fetch_row(res);
-	image->id = atoi((char*)row[0]);
-	strcpy(image->name,(char*)row[1]);
-	image->size = atoi((char*)row[2]);
-	image->width = atoi((char*)row[3]);
-	image->height = atoi((char*)row[4]);
-	image->releaseTypeId = atoi((char*)row[5]);
-	strcpy(image->source,(char*)row[6]);
-	mysql_free_result(res);
+	sprintf(sql,"SELECT i.* FROM tblImages i JOIN tblReleaseImages ri ON ri.imageId = i.imageId WHERE ri.releaseId=%i",release->id);
+	if(mysql_query(conn,sql)) {
+		release->nbImages = 0;
+		release->images = NULL;
+	} 
+	else {
+		res=mysql_store_result(conn);
+		release->nbImages = (int)mysql_num_rows(res);
+		if(release->nbImages==0) {
+			release->images = NULL;
+			mysql_free_result(res);
+		} 
+		else {
+			release->images = malloc(sizeof(gamedbImage) * release->nbImages);
+			for(i=0;i<release->nbImages;i++) {
+				row = mysql_fetch_row(res);
+				release->images[i].id = atoi((char*)row[0]);
+				strcpy(release->images[i].name,(char*)row[1]);
+				release->images[i].size = atoi((char*)row[2]);
+				release->images[i].width = atoi((char*)row[3]);
+				release->images[i].height = atoi((char*)row[4]);
+				release->images[i].releaseTypeId = atoi((char*)row[5]);
+				strcpy(release->images[i].source,(char*)row[6]);
+			}					
+			mysql_free_result(res);
+		}
+	}
 }
 
 void getFiles(gamedbRelease* release, MYSQL* conn) {
@@ -89,22 +40,27 @@ void getFiles(gamedbRelease* release, MYSQL* conn) {
 	int f;
 	char sql[255];
 	sprintf(sql,"SELECT * FROM tblFiles WHERE releaseId=%i",release->id);
-	mysql_query(conn,sql);
-	res = mysql_store_result(conn);
-	release->nbFiles = (int)mysql_num_rows(res);
-	release->files = malloc(sizeof(gamedbFile) * release->nbFiles);
-	for(f=0;f<release->nbFiles;f++) {
-		row = mysql_fetch_row(res);
-		release->files[f].id = atoi((char*)row[0]);
-		strcpy(release->files[f].name,(char*)row[1]);
-		release->files[f].size = atoi((char*)row[2]);
-		strcpy(release->files[f].crc,(char*)row[3]);
-		strcpy(release->files[f].md5,(char*)row[4]);
-		strcpy(release->files[f].sha1,(char*)row[5]);
-		strcpy(release->files[f].status,(char*)row[6]);
-		release->files[f].releaseId = atoi((char*)row[7]);
+	if(mysql_query(conn,sql)) {
+		release->nbFiles = 0;
+		release->files = NULL;
+	} 
+	else {
+		res = mysql_store_result(conn);
+		release->nbFiles = (int)mysql_num_rows(res);
+		release->files = malloc(sizeof(gamedbFile) * release->nbFiles);
+		for(f=0;f<release->nbFiles;f++) {
+			row = mysql_fetch_row(res);
+			release->files[f].id = atoi((char*)row[0]);
+			strcpy(release->files[f].name,(char*)row[1]);
+			release->files[f].size = atoi((char*)row[2]);
+			strcpy(release->files[f].crc,(char*)row[3]);
+			strcpy(release->files[f].md5,(char*)row[4]);
+			strcpy(release->files[f].sha1,(char*)row[5]);
+			strcpy(release->files[f].status,(char*)row[6]);
+			release->files[f].releaseId = atoi((char*)row[7]);
+		}
+		mysql_free_result(res);
 	}
-	mysql_free_result(res);
 }
 
 void getReleases(gamedbSoftware* software, MYSQL* conn) {
@@ -124,6 +80,7 @@ void getReleases(gamedbSoftware* software, MYSQL* conn) {
 		strcpy(software->releases[r].region,(char*)row[2]);
 		software->releases[r].softwareId = atoi((char*)row[3]);
 		getFiles(&(software->releases[r]),conn);
+		getImages(&(software->releases[r]),conn);
 	}
 	mysql_free_result(res);	
 }
@@ -194,12 +151,18 @@ void freeGameDb(gamedb* db) {
 			soft =&(sys->softwares[j]);
 			for(k=0;k<soft->nbReleases;k++) {
 				release = &(soft->releases[k]);
-				free(release->files);
+				if(release->files!=NULL) 
+					free(release->files);
+				if(release->images!=NULL)
+					free(release->images);
 			}
-			free(soft->releases);
+			if(soft->releases!=NULL)
+				free(soft->releases);
 		}
-		free(sys->softwares);
+		if(sys->softwares!=NULL)
+			free(sys->softwares);
 	}
-	free(db->systems);
+	if(db->systems!=NULL)
+		free(db->systems);
 	free(db);
 }

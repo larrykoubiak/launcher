@@ -32,8 +32,10 @@ typedef struct gamedbRelease {
 	char name[256];
 	char region[50];
 	int softwareId;
-	gamedbFile *files;
 	int nbFiles;
+	int nbImages;
+	gamedbFile *files;
+	gamedbImage *images;
 } gamedbRelease;
 
 typedef struct gamedbSoftware {
@@ -60,6 +62,7 @@ typedef struct gamedb {
 	gamedbSystem* systems;
 } gamedb;
 
+void getImages(gamedbRelease* release, MYSQL* conn);
 void getFiles(gamedbRelease* release, MYSQL* conn);
 void getReleases(gamedbSoftware* software, MYSQL* conn);
 void getSoftwares(gamedbSystem* system, MYSQL* conn);

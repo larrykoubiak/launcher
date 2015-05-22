@@ -95,6 +95,7 @@ int main(int argc, char** argv) {
 	gamedbSoftware *soft;
 	gamedbRelease *release;
 	gamedbFile *file;
+	gamedbImage *image;
 	int i,j,k,l;
 	
 	db = malloc(sizeof(gamedb));
@@ -113,6 +114,10 @@ int main(int argc, char** argv) {
 				for(l=0;l<release->nbFiles;l++) {
 					file = &(release->files[l]);
 					printf("      Id: %i Name: %s Size: %i CRC: %s MD5: %s SHA1: %s Status: %s Release Id: %i\n",file->id,file->name,file->size,file->crc,file->md5,file->sha1,file->status,file->releaseId);
+				}
+				for(l=0;l<release->nbImages;l++) {
+					image = &(release->images[l]);
+					printf("        Id: %i Name: %s Size: %i Width: %i Height: %i Release Id: %i Source: %s\n",image->id,image->name,image->size,image->width,image->height,image->releaseTypeId,image->source);
 				}
 			}
 		}

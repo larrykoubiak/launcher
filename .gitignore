@@ -28,6 +28,7 @@
 *.x86_64
 *.hex
 main
+sql.sh
 
 # Debug files
 *.dSYM/
