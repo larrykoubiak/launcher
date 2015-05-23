@@ -11,6 +11,7 @@
 
 *.lib binary
 *.dll binary
+*.a binary
 
 ###############################################################################
 # Set default behavior for command prompt diff.

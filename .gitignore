@@ -13,6 +13,7 @@
 !libmysql.lib
 !mysqlclient.lib
 *.a
+!libmysqlclient.a
 *.la
 *.lo
 
