@@ -1,0 +1,58 @@
+
+-- BOF --
+
+Id: 1 Name: Neo Geo Pocket Manufacturer: SNK Format:  Acronym: NGP
+  Id: 1 Name: SNK Neo Geo Pocket Type: BIOS System Id: 1
+    Id: 1 Name: [BIOS] SNK Neo Geo Pocket (Japan, Europe) Region: Japan Software Id: 1
+      Id: 1 Name: [BIOS] SNK Neo Geo Pocket (Japan, Europe).ngp Size: 65536 CRC: 6232DF8D MD5: D87D876C4391935C9D48EF352A3FF02D SHA1: 2F6429B68446536D8B03F35D02F1E98BEB6460A0 Status:  Release Id: 1
+  Id: 2 Name: Baseball Stars Type: Game System Id: 1
+    Id: 2 Name: Baseball Stars (Japan, Europe) (En,Ja) Region: Japan Software Id: 2
+      Id: 2 Name: Baseball Stars (Japan, Europe) (En,Ja).ngp Size: 1048576 CRC: 4781AE84 MD5: 9150A58F7094A48B980C1AC71B9CFAB9 SHA1: 8ECE00F21AE49ED4777A9C990B2782465EF95380 Status:  Release Id: 2
+        Id: 16 Name: Baseball Stars (Japan, Europe) (En,Ja)_front.jpg Size: 52631 Width: 300 Height: 300 Release Id: 1 Source: GameFAQS
+        Id: 17 Name: Baseball Stars (Japan, Europe) (En,Ja)_back.jpg Size: 47655 Width: 300 Height: 300 Release Id: 2 Source: GameFAQS
+  Id: 3 Name: King of Fighters R-1 & Melon-chan no Seichou Nikki - Pocket Fighting Series Type: Game System Id: 1
+    Id: 3 Name: King of Fighters R-1 & Melon-chan no Seichou Nikki - Pocket Fighting Series (Japan) (Demo) Region: Japan Software Id: 3
+      Id: 3 Name: King of Fighters R-1 & Melon-chan no Seichou Nikki - Pocket Fighting Series (Japan) (Demo).ngp Size: 2097152 CRC: 2660BFC4 MD5: 8B5500BDF12D0D26F84D6E2D6D8E5008 SHA1: A02D1B1113DBEAC895832F1501029E40D9AAB493 Status:  Release Id: 3
+  Id: 4 Name: King of Fighters R-1 - Pocket Fighting Series Type: Game System Id: 1
+    Id: 4 Name: King of Fighters R-1 - Pocket Fighting Series (Japan, Europe) (En,Ja) Region: Japan Software Id: 4
+      Id: 4 Name: King of Fighters R-1 - Pocket Fighting Series (Japan, Europe) (En,Ja).ngp Size: 2097152 CRC: DCEB7E11 MD5: 347D0EF33C889CC826D214CAF8475AE0 SHA1: 4A7ADBCCCB05B6047A38BB861523CBAE7D956BFA Status:  Release Id: 4
+        Id: 7 Name: King of Fighters R-1 - Pocket Fighting Series (Japan, Europe) (En,Ja)_front.jpg Size: 91041 Width: 640 Height: 727 Release Id: 1 Source: GameFAQS
+        Id: 8 Name: King of Fighters R-1 - Pocket Fighting Series (Japan, Europe) (En,Ja)_back.jpg Size: 134898 Width: 640 Height: 718 Release Id: 2 Source: GameFAQS
+        Id: 9 Name: King of Fighters R-1 - Pocket Fighting Series (Japan, Europe) (En,Ja)_side.jpg Size: 18816 Width: 640 Height: 136 Release Id: 3 Source: GameFAQS
+  Id: 5 Name: Melon-chan no Seichou Nikki Type: Game System Id: 1
+    Id: 5 Name: Melon-chan no Seichou Nikki (Japan) Region: Japan Software Id: 5
+      Id: 5 Name: Melon-chan no Seichou Nikki (Japan).ngp Size: 1048576 CRC: CB42CFA4 MD5: 104101B61276FFF91574A50B6D5F38BC SHA1: 2DBF9C40AB0167FF172F10354D4674E5E6C901D5 Status:  Release Id: 5
+        Id: 19 Name: Melon-chan no Seichou Nikki (Japan)_front.jpg Size: 47655 Width: 244 Height: 280 Release Id: 1 Source: GameFAQS
+        Id: 20 Name: Melon-chan no Seichou Nikki (Japan)_back.jpg Size: 37966 Width: 244 Height: 280 Release Id: 2 Source: GameFAQS
+  Id: 6 Name: Neo Cherry Master - Real Casino Series Type: Game System Id: 1
+    Id: 6 Name: Neo Cherry Master - Real Casino Series (Japan, Europe) (En,Ja) Region: Japan Software Id: 6
+      Id: 6 Name: Neo Cherry Master - Real Casino Series (Japan, Europe) (En,Ja).ngp Size: 1048576 CRC: 5C067579 MD5: 006AFE2DEC77D73A2C592AEB1B3F694C SHA1: C171D8D22D667D713BFC73C2B1C04BC77AACBB5C Status:  Release Id: 6
+        Id: 21 Name: Neo Cherry Master - Real Casino Series (Japan, Europe) (En,Ja)_front.jpg Size: 42540 Width: 255 Height: 280 Release Id: 1 Source: GameFAQS
+        Id: 22 Name: Neo Cherry Master - Real Casino Series (Japan, Europe) (En,Ja)_back.jpg Size: 40035 Width: 243 Height: 280 Release Id: 2 Source: GameFAQS
+  Id: 7 Name: Neo Geo Cup '98 Type: Game System Id: 1
+    Id: 7 Name: Neo Geo Cup '98 (Japan, Europe) (En,Ja) Region: Japan Software Id: 7
+      Id: 7 Name: Neo Geo Cup '98 (Japan, Europe) (En,Ja).ngp Size: 1048576 CRC: 33ADD5BD MD5: 30EFE4F72D4678FFB97B885B1B7C3DA1 SHA1: 445743119C65A6765A0BDC849A12E9038192840C Status:  Release Id: 7
+        Id: 18 Name: Neo Geo Cup '98 (Japan, Europe) (En,Ja)_front.jpg Size: 23099 Width: 247 Height: 280 Release Id: 1 Source: GameFAQS
+  Id: 8 Name: Pocket Tennis - Pocket Sports Series Type: Game System Id: 1
+    Id: 8 Name: Pocket Tennis - Pocket Sports Series (Japan, Europe) (En,Ja) Region: Japan Software Id: 8
+      Id: 8 Name: Pocket Tennis - Pocket Sports Series (Japan, Europe) (En,Ja).ngp Size: 524288 CRC: 89410850 MD5: 6523C679A90573B09B4F70532CDFF09C SHA1: 59602E44C631A00B2DB53196204A4BC22CCD7025 Status:  Release Id: 8
+        Id: 23 Name: Pocket Tennis - Pocket Sports Series (Japan, Europe) (En,Ja)_front.jpg Size: 17481 Width: 266 Height: 300 Release Id: 1 Source: GameFAQS
+        Id: 24 Name: Pocket Tennis - Pocket Sports Series (Japan, Europe) (En,Ja)_back.jpg Size: 26507 Width: 266 Height: 300 Release Id: 2 Source: GameFAQS
+  Id: 9 Name: Renketsu Puzzle Tsunagete Pon! Type: Game System Id: 1
+    Id: 9 Name: Renketsu Puzzle Tsunagete Pon! (Japan) Region: Japan Software Id: 9
+      Id: 9 Name: Renketsu Puzzle Tsunagete Pon! (Japan).ngp Size: 524288 CRC: CE09F534 MD5: 9330C9A7BBD6A7DC5B5963A5B7623443 SHA1: CBE53B08D03EF684C08FC6EE28FCA168A3D091A7 Status: verified Release Id: 9
+        Id: 25 Name: Renketsu Puzzle Tsunagete Pon! (Japan)_front.jpg Size: 33009 Width: 300 Height: 345 Release Id: 1 Source: GameFAQS
+  Id: 10 Name: Samurai Shodown! - Pocket Fighting Series Type: Game System Id: 1
+    Id: 10 Name: Samurai Shodown! - Pocket Fighting Series (Japan, Europe) (En,Ja) Region: Japan Software Id: 10
+      Id: 10 Name: Samurai Shodown! - Pocket Fighting Series (Japan, Europe) (En,Ja).ngp Size: 2097152 CRC: 32E4696A MD5: D13F954B2F1C703BDF857837C24E332E SHA1: 2C6ADFA69E7AEADA7D4198B373436EEE35B70D01 Status:  Release Id: 10
+        Id: 26 Name: Samurai Shodown! - Pocket Fighting Series (Japan, Europe) (En,Ja)_front.jpg Size: 76588 Width: 640 Height: 723 Release Id: 1 Source: GameFAQS
+        Id: 27 Name: Samurai Shodown! - Pocket Fighting Series (Japan, Europe) (En,Ja)_back.jpg Size: 105782 Width: 640 Height: 738 Release Id: 2 Source: GameFAQS
+        Id: 28 Name: Samurai Shodown! - Pocket Fighting Series (Japan, Europe) (En,Ja)_side.jpg Size: 15511 Width: 640 Height: 134 Release Id: 3 Source: GameFAQS
+  Id: 11 Name: Shougi no Tatsujin Type: Game System Id: 1
+    Id: 11 Name: Shougi no Tatsujin (Japan) Region: Japan Software Id: 11
+      Id: 11 Name: Shougi no Tatsujin (Japan).ngp Size: 524288 CRC: F34D0C9B MD5: 9250B3328D64D3A1E7F9D50A04CEB64F SHA1: AB0C33236F72D2B317D91D034756B56CFCA1B0B4 Status:  Release Id: 11
+        Id: 29 Name: Shougi no Tatsujin (Japan)_front.jpg Size: 36095 Width: 330 Height: 384 Release Id: 1 Source: GameFAQS
+        Id: 30 Name: Shougi no Tatsujin (Japan)_back.jpg Size: 22617 Width: 300 Height: 298 Release Id: 2 Source: GameFAQS
+
+-- EOF --
+

@@ -27,6 +27,19 @@ typedef struct gamedbFile {
 	int releaseId;
 } gamedbFile;
 
+typedef struct gamedbReleaseFlag {
+	int id;
+	char name[50];
+} gamedbSoftwareFlag;
+
+typedef struct gamedbReleaseData {
+	int id;
+	int releaseId;
+	int softwareFlagId;
+	char value[2001];
+	char source[50];
+} gamedbSoftwareData;
+
 typedef struct gamedbRelease {
 	int id;
 	char name[256];
@@ -37,6 +50,19 @@ typedef struct gamedbRelease {
 	gamedbFile *files;
 	gamedbImage *images;
 } gamedbRelease;
+
+typedef struct gamedbSoftwareFlag {
+	int id;
+	char name[50];
+} gamedbSoftwareFlag;
+
+typedef struct gamedbSoftwareData {
+	int id;
+	int softwareId;
+	int softwareFlagId;
+	char value[2001];
+	char source[50];
+} gamedbSoftwareData;
 
 typedef struct gamedbSoftware {
 	int id;
@@ -69,11 +95,5 @@ void getSoftwares(gamedbSystem* system, MYSQL* conn);
 void getSystems(gamedb* db,MYSQL* conn);
 void getGameDb(gamedb* db);
 void freeGameDb(gamedb* db);
-
-void getSystemFromDb(int systemId,MYSQL* conn, gamedbSystem* sys);
-void getSoftwareFromDb(int softwareId,MYSQL* conn, gamedbSoftware* soft);
-void getReleaseFromDb(int releaseId, MYSQL* conn, gamedbRelease *rel);
-void getFileFromDb(int fileId, MYSQL* conn, gamedbFile *file);
-void getImageFromDb(int imageId, MYSQL* conn, gamedbImage *image);
 
 #endif
