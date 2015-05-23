@@ -10,12 +10,15 @@
 
 # Libraries
 *.lib
+!libmysql.lib
+!mysqlclient.lib
 *.a
 *.la
 *.lo
 
 # Shared objects (inc. Windows DLLs)
 *.dll
+!libmysql.dll
 *.so
 *.so.*
 *.dylib
