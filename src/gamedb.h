@@ -30,7 +30,7 @@ typedef struct gamedbFile {
 typedef struct gamedbReleaseFlag {
 	int id;
 	char name[50];
-} gamedbSoftwareFlag;
+} gamedbReleaseFlag;
 
 typedef struct gamedbReleaseData {
 	int id;
@@ -38,7 +38,7 @@ typedef struct gamedbReleaseData {
 	int softwareFlagId;
 	char value[2001];
 	char source[50];
-} gamedbSoftwareData;
+} gamedbReleaseData;
 
 typedef struct gamedbRelease {
 	int id;
