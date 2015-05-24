@@ -41,5 +41,6 @@ int main(int argc, char** argv) {
 	}
 	puts("\n-- EOF --\n");
 	freeGameDb(db);
+	system("PAUSE");
 	return 0;
 }
