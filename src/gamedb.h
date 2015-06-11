@@ -88,12 +88,12 @@ typedef struct gamedb {
 	gamedbSystem* systems;
 } gamedb;
 
-void getImages(gamedbRelease* release, MYSQL* conn);
-void getFiles(gamedbRelease* release, MYSQL* conn);
-void getReleases(gamedbSoftware* software, MYSQL* conn);
-void getSoftwares(gamedbSystem* system, MYSQL* conn);
-void getSystems(gamedb* db,MYSQL* conn);
 void getGameDb(gamedb* db);
+void getSystems(gamedb* db,MYSQL* conn);
+void getSoftwares(gamedbSystem* system, MYSQL* conn);
+void getReleases(gamedbSoftware* software, MYSQL* conn);
+void getFiles(gamedbRelease* release, MYSQL* conn);
+void getImages(gamedbRelease* release, MYSQL* conn);
 void freeGameDb(gamedb* db);
 
 #endif
