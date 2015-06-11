@@ -6,13 +6,16 @@ LIBS= -lmenu -lncurses `mysql_config --libs`
 
 all: main
 
-main: gamedb.o main.o
+main: gamedb.o interface.o main.o
 	$(CC) $(CFLAGS) -o ../$@ $? $(LIBS)
 
 main.o: main.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 gamedb.o: gamedb.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+	
+interface.o: interface.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
