@@ -15,9 +15,8 @@ void init_curses() {
 	refresh();
 }
 
-void show_systems_menu(gamedb *db) {
+void select_sys_menu(gamedb *db, gamedbSystem *sys){
 	//Variables
-	gamedbSystem *sys;
 	int ch;
 	ITEM **my_items;
 	MENU *my_menu;
@@ -29,9 +28,8 @@ void show_systems_menu(gamedb *db) {
 	my_items = (ITEM **)calloc(db->nbSystems + 1, sizeof(ITEM *));
 	//Add items
 	for(i=0;i<db->nbSystems;i++) {		
-		sys = &(db->systems[i]);
-		my_items[i] = new_item(sys->acronym,sys->name);
-		set_item_userptr(my_items[i], sys);
+		my_items[i] = new_item(db->systems[i].acronym,db->systems[i].name);
+		set_item_userptr(my_items[i], &(db->systems[i]));
 	}
 	my_items[db->nbSystems] = (ITEM* )NULL;
 	my_menu = new_menu((ITEM**)my_items);
@@ -44,7 +42,7 @@ void show_systems_menu(gamedb *db) {
 	wbkgd(my_menu_win,COLOR_PAIR(3));
 	box(my_menu_win,0,0);
 	print_in_middle(my_menu_win, 1, 0, 40, "Systems", COLOR_PAIR(1));
-	mvprintw(LINES-2,0,"F1 to exit");
+	mvprintw(LINES-2,0,"Enter to exit");
 	refresh();
 	//Post menu
 	post_menu(my_menu);
@@ -63,14 +61,19 @@ void show_systems_menu(gamedb *db) {
 		}
 	}
 	cur_item = current_item(my_menu);
-	sys = (gamedbSystem*)item_userptr(cur_item);
-	print_system(sys);
-	while((ch = wgetch(my_menu_win)) !=KEY_F(1)) ;
-	unpost_menu(my_menu);
-	free_menu(my_menu);
-	for(i=0;i<db->nbSystems;i++) {
-		free_item(my_items[i]);
-	}	
+	memcpy(sys,(gamedbSystem*)item_userptr(cur_item),sizeof(gamedbSystem));
+	destroy_system_menu(my_menu,my_items,db->nbSystems,my_menu_win);
+}
+
+void destroy_system_menu(MENU *menu,ITEM **items, int nbitems, WINDOW *win) {
+	int i;
+	unpost_menu(menu);
+	free_menu(menu);
+	for(i=0;i<nbitems;i++) {
+		free_item(items[i]);
+	}
+	free(items);
+	delwin(win);
 }
 
 void print_in_middle(WINDOW *win, int starty, int startx, int width, char *string, chtype color) {
@@ -99,5 +102,7 @@ void print_system(gamedbSystem *sys) {
 	move(LINES - 4,0);
 	clrtoeol();
 	printw("Id:%d Name:%s",sys->id,sys->name);
+	move(LINES - 3,0);
 	refresh();
+	getch();
 }
