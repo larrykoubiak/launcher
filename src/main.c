@@ -8,17 +8,16 @@
 int main(int argc, char** argv) {
 	//database pointers
 	gamedb *db;
-	gamedbSystem *cur_sys;
 	//Init curses
 	init_curses();
-	//input variables
+	//init variables
 	db = malloc(sizeof(gamedb));
-	cur_sys = malloc(sizeof(gamedbSystem));
+	//fill db
 	getGameDb(db);
-	select_sys_menu(db,cur_sys);
-	print_system(cur_sys);
+	//show main window
+	show_main_window(db);
+	//cleanup
 	endwin();
 	freeGameDb(db);
-	free(cur_sys);
 	return 0;
 }

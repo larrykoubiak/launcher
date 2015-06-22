@@ -15,4 +15,4 @@ clean: clean_main
 	$(MAKE) -C $(CODE_DIR) clean
 	
 clean_main:
-	rm main
+	rm launcher
